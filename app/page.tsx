@@ -1,27 +1,19 @@
-"use client";
+import LoginButton from "@/components/dashboard/login-button";
+import SignOutButton from "@/components/dashboard/signout-button";
+import { getUser } from "@/lib/auth";
 
-import { useChat } from "ai/react";
-
-export default function Home() {
-  const { messages, input, handleInputChange, handleSubmit, data } = useChat();
+export default async function Home() {
+  const user = await getUser();
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      {messages.map((m) => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === "user" ? "User: " : "AI: "}
-          {m.content}
+    <main className="w-full min-h-dvh flex gap-3 justify-center items-center">
+      {user ? (
+        <div className="flex flex-col gap-3 items-center">
+          <h1 className="text-2xl">Welcome back, {user.email}!</h1>
+          <SignOutButton />
         </div>
-      ))}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
-          value={input}
-          placeholder="Say something..."
-          onChange={handleInputChange}
-        />
-      </form>
-    </div>
+      ) : (
+        <LoginButton />
+      )}
+    </main>
   );
 }
