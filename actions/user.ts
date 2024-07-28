@@ -13,8 +13,7 @@ export const loginAction = async (provider: Provider) => {
           access_type: "offline",
           prompt: "consent",
         },
-        scopes:
-          "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly",
+        scopes: "https://www.googleapis.com/auth/yt-analytics.readonly",
       },
     });
 
