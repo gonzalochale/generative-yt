@@ -6,14 +6,6 @@ import { toast } from "sonner";
 export const getProviderTokens = async () => {
   const session = (await getSupabaseAuth().getSession()).data.session;
 
-  if (!session?.provider_token || !session?.provider_refresh_token) {
-    const { errorMessage } = await signOutAction();
-    if (errorMessage) {
-      toast.error("Failed to sign out");
-    }
-    toast.success("You need no loggin again");
-  }
-
   // const user = (await getSupabaseAuth().getUser()).data.user;
 
   // const userRefreshToken = await getSupabaseClient()

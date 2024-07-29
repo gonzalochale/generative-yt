@@ -12,6 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getSupabaseAuth } from "@/lib/auth";
+import { signOutAction } from "./user";
+import { containeranalysis_v1alpha1 } from "googleapis";
 
 const LoadingComponent = () => (
   <Skeleton className="w-full p-4 flex gap-1">
@@ -64,6 +67,13 @@ const ViewsTable = ({ data }: ViewsTableProps) => (
 );
 
 export async function streamLastMontviews() {
+  const session = (await getSupabaseAuth().getSession()).data.session;
+
+  if (!session || !session.provider_token || !session.provider_refresh_token) {
+    const { errorMessage, url } = await signOutAction();
+    return;
+  }
+
   const result = await streamUI({
     model: openai("gpt-4o-mini"),
     prompt: "Stream the last month views",
