@@ -9,6 +9,31 @@ export const getUser = async () => {
   return user;
 };
 
+export function getSupabaseClient() {
+  const cookieStore = cookies();
+
+  const supabaseClient = createServerClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {}
+        },
+      },
+    }
+  );
+
+  return supabaseClient;
+}
+
 export function getSupabaseAuth() {
   const cookieStore = cookies();
 
