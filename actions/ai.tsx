@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/card";
 import { getSupabaseAuth } from "@/lib/auth";
 import { signOutAction } from "./user";
-import { containeranalysis_v1alpha1 } from "googleapis";
 
 const LoadingComponent = () => (
   <Skeleton className="w-full p-4 flex gap-1">
@@ -66,21 +65,35 @@ const ViewsTable = ({ data }: ViewsTableProps) => (
   </Card>
 );
 
-export async function streamLastMontviews() {
+export async function reply(message: string) {
   const session = (await getSupabaseAuth().getSession()).data.session;
 
   if (!session || !session.provider_token || !session.provider_refresh_token) {
-    const { errorMessage, url } = await signOutAction();
+    await signOutAction();
     return;
   }
 
   const result = await streamUI({
     model: openai("gpt-4o-mini"),
-    prompt: "Stream the last month views",
-    text: ({ content }) => <div>{content}</div>,
+    messages: [
+      {
+        role: "system",
+        content: `You are an advanced AI assistant specializing in YouTube analytics. Your primary task is to assist with analytics for YouTube channels.
+
+        -When users inquire about their YouTube channel views for the past month(last 28-30 days), use the \getViewsData\ tool to show this data in a component.
+        
+        -If a user asks for another type of data, you need to tell that you cant help with that and suggest using any of the following sentences:
+        Try asking ‘How many views did I get in the last month?’ or ‘Show me my views for the last 28 days’.`,
+      },
+      {
+        role: "user",
+        content: message,
+      },
+    ],
     tools: {
       getViewsData: {
-        description: "Get the views data from the last month",
+        description:
+          "Get the views data from the last month and show it in a component.",
         parameters: z.object({}),
         generate: async function* () {
           yield <LoadingComponent />;
@@ -89,6 +102,7 @@ export async function streamLastMontviews() {
         },
       },
     },
+    text: ({ content }) => <div>{content}</div>,
   });
 
   return result.value;
