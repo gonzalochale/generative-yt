@@ -1,44 +1,24 @@
-import Chat from "@/components/dashboard/chat";
-import LoginButton from "@/components/dashboard/login-button";
-import SignOutButton from "@/components/dashboard/signout-button";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Label } from "@/components/ui/label";
+import LoginButton from "@/components/auth/login-button";
 import { getUser } from "@/lib/auth";
+import { Chat } from "@/components/chat/chat";
+import { nanoid } from "@/lib/utils";
+import Header from "@/components/header";
 
-export default async function Home() {
+const page = async () => {
   const user = await getUser();
-
+  const id = nanoid();
   return (
-    <main className="container w-full min-h-dvh flex flex-col gap-3 justify-start items-center py-10">
+    <main className="container w-full h-dvh flex flex-col justify-center items-center py-5">
       {user ? (
         <>
-          <header className="flex gap-10 p-2 items-center border rounded-[1.25rem] bg-card">
-            <div className="flex items-center gap-1">
-              <Avatar>
-                <AvatarImage
-                  src={user.user_metadata.avatar_url}
-                  alt={user.user_metadata.full_name}
-                />
-                <AvatarFallback>
-                  {user.user_metadata.full_name.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <Label>{user.user_metadata.full_name}</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <ThemeSwitcher />
-              <SignOutButton />
-            </div>
-          </header>
-          <div className="flex flex-col flex-wrap max-w-2xl border"></div>
-          <Chat />
+          <Header />
+          <Chat id={id} />
         </>
       ) : (
-        <section className="w-full h-full flex flex-1 items-center justify-center">
-          <LoginButton />
-        </section>
+        <LoginButton />
       )}
     </main>
   );
-}
+};
+
+export default page;

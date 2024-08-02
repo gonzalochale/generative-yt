@@ -22,6 +22,7 @@ const SignOutButton = () => {
     <Button
       size="sm"
       variant="destructive"
+      className="w-full"
       onClick={() => handleSignOut()}
       disabled={isPending}
     >
