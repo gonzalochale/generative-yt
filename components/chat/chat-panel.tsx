@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 import { PromptForm } from "@/components/prompt-form";
@@ -6,6 +8,7 @@ import type { AI } from "@/lib/chat/actions";
 import { nanoid } from "nanoid";
 import { UserMessage } from "@/components/chat/message";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export interface ChatPanelProps {
   input: string;
@@ -45,35 +48,47 @@ export function ChatPanel({ input, setInput }: ChatPanelProps) {
         <div className="mb-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {messages.length === 0 &&
             exampleMessages.map((example) => (
-              <Card
-                className="hover:cursor-pointer hover:bg-muted"
+              <motion.div
                 key={example.heading}
-                onClick={async () => {
-                  setMessages((currentMessages) => [
-                    ...currentMessages,
-                    {
-                      id: nanoid(),
-                      display: <UserMessage>{example.message}</UserMessage>,
-                    },
-                  ]);
-
-                  const responseMessage = await submitUserMessage(
-                    example.message
-                  );
-
-                  setMessages((currentMessages) => [
-                    ...currentMessages,
-                    responseMessage,
-                  ]);
+                className="flex flex-1"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  duration: 0.3,
+                  bounce: 0,
+                  delay: Math.random() * 0.3,
                 }}
               >
-                <CardHeader>
-                  <CardDescription className="text-foreground">
-                    {example.heading}
-                  </CardDescription>
-                  <CardDescription>{example.subheading}</CardDescription>
-                </CardHeader>
-              </Card>
+                <Card
+                  className="hover:cursor-pointer hover:bg-muted"
+                  onClick={async () => {
+                    setMessages((currentMessages) => [
+                      ...currentMessages,
+                      {
+                        id: nanoid(),
+                        display: <UserMessage>{example.message}</UserMessage>,
+                      },
+                    ]);
+
+                    const responseMessage = await submitUserMessage(
+                      example.message
+                    );
+
+                    setMessages((currentMessages) => [
+                      ...currentMessages,
+                      responseMessage,
+                    ]);
+                  }}
+                >
+                  <CardHeader>
+                    <CardDescription className="text-foreground">
+                      {example.heading}
+                    </CardDescription>
+                    <CardDescription>{example.subheading}</CardDescription>
+                  </CardHeader>
+                </Card>
+              </motion.div>
             ))}
         </div>
         <PromptForm input={input} setInput={setInput} />

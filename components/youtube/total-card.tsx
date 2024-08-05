@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 interface ViewsCardProps {
   label: string;
@@ -14,15 +15,37 @@ interface ViewsCardProps {
 
 export const TotalCard = ({ label, data }: ViewsCardProps) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          {data} {label} all time
-        </CardTitle>
-        <CardDescription>
-          Now i know how many {label} you got all time, you can ask me about it
-        </CardDescription>
-      </CardHeader>
-    </Card>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        type: "spring",
+        duration: 0.7,
+        bounce: 0,
+      }}
+    >
+      <Card>
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            type: "spring",
+            duration: 0.3,
+            bounce: 0,
+            delay: 0.7,
+          }}
+        >
+          <CardHeader>
+            <CardTitle>
+              {data} {label} all time
+            </CardTitle>
+            <CardDescription>
+              Now I know how many {label} you got all time. You can ask me about
+              it.
+            </CardDescription>
+          </CardHeader>
+        </motion.div>
+      </Card>
+    </motion.div>
   );
 };

@@ -94,7 +94,6 @@ async function submitUserMessage(content: string) {
     text: ({ content, done, delta }) => {
       if (!textStream) {
         textStream = createStreamableValue("");
-        textNode = <GenerativeYTMessage content={textStream.value} />;
       }
 
       if (done) {
@@ -110,8 +109,8 @@ async function submitUserMessage(content: string) {
             },
           ],
         });
-      } else {
-        textStream.update(delta);
+
+        textNode = <GenerativeYTMessage content={content} />;
       }
 
       return textNode;

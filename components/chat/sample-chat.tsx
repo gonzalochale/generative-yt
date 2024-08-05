@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import LoginButton from "@/components/auth/login-button";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export function SampleChat() {
   const { formRef, onKeyDown } = useEnterSubmit();
@@ -59,20 +60,32 @@ export function SampleChat() {
         <div className="mx-auto sm:max-w-2xl px-4">
           <div className="mb-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
             {exampleMessages.map((example) => (
-              <Card
-                className="hover:cursor-pointer hover:bg-muted"
+              <motion.div
                 key={example.heading}
-                onClick={async () => {
-                  setModal(true);
+                className="flex flex-1"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  duration: 0.3,
+                  bounce: 0,
+                  delay: Math.random() * 0.3,
                 }}
               >
-                <CardHeader>
-                  <CardDescription className="text-foreground">
-                    {example.heading}
-                  </CardDescription>
-                  <CardDescription>{example.subheading}</CardDescription>
-                </CardHeader>
-              </Card>
+                <Card
+                  className="hover:cursor-pointer hover:bg-muted"
+                  onClick={async () => {
+                    setModal(true);
+                  }}
+                >
+                  <CardHeader>
+                    <CardDescription className="text-foreground">
+                      {example.heading}
+                    </CardDescription>
+                    <CardDescription>{example.subheading}</CardDescription>
+                  </CardHeader>
+                </Card>
+              </motion.div>
             ))}
           </div>
           <form
