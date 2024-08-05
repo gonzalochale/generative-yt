@@ -15,10 +15,7 @@ import { sleep, nanoid } from "@/lib/utils";
 import { Chat, Message } from "@/lib/types";
 import { getSupabaseAuth, getUser } from "../auth";
 import { signOutAction } from "@/actions/user";
-import {
-  LastMonthViewsCard,
-  SkeletonCard,
-} from "@/components/youtube/last-month-views";
+import { LastMonthViewsCard } from "@/components/youtube/last-month-views";
 import {
   getAllTimeComments,
   getAllTimeLikes,
@@ -43,8 +40,6 @@ import { TotalCard } from "@/components/youtube/total-card";
 
 async function submitUserMessage(content: string) {
   "use server";
-
-  const user = await getUser();
 
   const session = await (await getSupabaseAuth().getSession()).data.session;
 
@@ -128,7 +123,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -182,7 +177,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -236,7 +231,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -290,7 +285,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -344,7 +339,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -398,7 +393,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -452,7 +447,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 
@@ -506,7 +501,7 @@ async function submitUserMessage(content: string) {
         generate: async function* () {
           yield (
             <GenerativeYTCard>
-              <SkeletonCard />
+              <SkeletonMessage />
             </GenerativeYTCard>
           );
 

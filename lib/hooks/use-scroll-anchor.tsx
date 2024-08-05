@@ -9,63 +9,47 @@ export const useScrollAnchor = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const scrollToBottom = useCallback(() => {
-    if (messagesRef.current) {
-      messagesRef.current.scrollIntoView({
-        block: "end",
-        behavior: "smooth",
-      });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, []);
 
   useEffect(() => {
-    if (messagesRef.current) {
-      if (isAtBottom && !isVisible) {
-        messagesRef.current.scrollIntoView({
-          block: "end",
-        });
-      }
+    if (isAtBottom) {
+      scrollToBottom();
     }
-  }, [isAtBottom, isVisible]);
+  }, [isAtBottom, scrollToBottom]);
 
   useEffect(() => {
-    const { current } = scrollRef;
-
-    if (current) {
-      const handleScroll = (event: Event) => {
-        const target = event.target as HTMLDivElement;
-        const offset = 25;
-        const isAtBottom =
-          target.scrollTop + target.clientHeight >=
-          target.scrollHeight - offset;
-
-        setIsAtBottom(isAtBottom);
+    if (scrollRef.current) {
+      const handleScroll = () => {
+        if (scrollRef.current) {
+          const { scrollTop, clientHeight, scrollHeight } = scrollRef.current;
+          setIsAtBottom(scrollTop + clientHeight >= scrollHeight - 1);
+        }
       };
 
-      current.addEventListener("scroll", handleScroll, {
+      scrollRef.current.addEventListener("scroll", handleScroll, {
         passive: true,
       });
 
       return () => {
-        current.removeEventListener("scroll", handleScroll);
+        if (scrollRef.current) {
+          scrollRef.current.removeEventListener("scroll", handleScroll);
+        }
       };
     }
   }, []);
 
   useEffect(() => {
     if (visibilityRef.current) {
-      let observer = new IntersectionObserver(
+      const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setIsVisible(true);
-            } else {
-              setIsVisible(false);
-            }
+            setIsVisible(entry.isIntersecting);
           });
         },
-        {
-          rootMargin: "0px 0px -150px 0px",
-        }
+        { rootMargin: "0px 0px -100px 0px" }
       );
 
       observer.observe(visibilityRef.current);
@@ -74,7 +58,7 @@ export const useScrollAnchor = () => {
         observer.disconnect();
       };
     }
-  });
+  }, []);
 
   return {
     messagesRef,

@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { commentsData, subscribersData } from "@/lib/types";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   ChartConfig,
   ChartContainer,
@@ -17,16 +16,6 @@ import {
 } from "@/components/ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import moment from "moment";
-
-export const SkeletonCard = () => {
-  return (
-    <div className="w-full flex flex-col gap-3">
-      <Skeleton className="h-10 w-full rounded-md" />
-      <Skeleton className="h-20 w-full rounded-md" />
-      <Skeleton className="h-14 w-full rounded-md" />
-    </div>
-  );
-};
 
 interface SubscribersCardProps {
   data: subscribersData[];

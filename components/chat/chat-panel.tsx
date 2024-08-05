@@ -8,11 +8,8 @@ import { UserMessage } from "@/components/chat/message";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
 export interface ChatPanelProps {
-  title?: string;
   input: string;
   setInput: (value: string) => void;
-  isAtBottom: boolean;
-  scrollToBottom: () => void;
 }
 
 export function ChatPanel({ input, setInput }: ChatPanelProps) {
@@ -47,7 +44,7 @@ export function ChatPanel({ input, setInput }: ChatPanelProps) {
       <div className="mx-auto sm:max-w-2xl px-4">
         <div className="mb-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {messages.length === 0 &&
-            exampleMessages.map((example, index) => (
+            exampleMessages.map((example) => (
               <Card
                 className="hover:cursor-pointer hover:bg-muted"
                 key={example.heading}

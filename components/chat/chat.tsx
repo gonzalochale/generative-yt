@@ -27,24 +27,28 @@ export function Chat({ id, className }: ChatProps) {
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
 
+  useEffect(() => {
+    if (isAtBottom) {
+      scrollToBottom();
+    }
+  }, [messages, isAtBottom, scrollToBottom]);
+
   return (
-    <div
-      className="group grow w-full overflow-auto pl-0 flex flex-col items-center justify-between peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
-      ref={scrollRef}
-    >
+    <>
       <div
-        className={cn("pb-[100px] pt-4 md:pt-10 w-full", className)}
-        ref={messagesRef}
+        className="relative grow w-full overflow-auto pl-0 flex flex-col items-center justify-between"
+        ref={scrollRef}
       >
-        {messages.length ? <ChatList messages={messages} /> : null}
-        <div className="w-full h-px" ref={visibilityRef} />
+        <div
+          className={cn("pb-[100px] pt-4 md:pt-10 w-full", className)}
+          ref={messagesRef}
+        >
+          {messages.length ? <ChatList messages={messages} /> : null}
+
+          <div className="w-full h-px" ref={visibilityRef} />
+        </div>
       </div>
-      <ChatPanel
-        input={input}
-        setInput={setInput}
-        isAtBottom={isAtBottom}
-        scrollToBottom={scrollToBottom}
-      />
-    </div>
+      <ChatPanel input={input} setInput={setInput} />
+    </>
   );
 }

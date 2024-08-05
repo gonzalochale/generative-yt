@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
 import { nanoid } from "nanoid";
 import Textarea from "react-textarea-autosize";
-import { IconArrowRight } from "@/components/ui/icons";
+import { IconArrowUp } from "@/components/ui/icons";
 
 export function PromptForm({
   input,
@@ -75,11 +75,12 @@ export function PromptForm({
       />
       <Button
         type="submit"
+        variant="ghost"
         size="icon"
         disabled={input === ""}
-        className="z-50 absolute right-2 bottom-6 rounded-full"
+        className="z-50 absolute  right-2 bottom-6 rounded-full group"
       >
-        <IconArrowRight />
+        <IconArrowUp className="size-6" />
       </Button>
     </form>
   );

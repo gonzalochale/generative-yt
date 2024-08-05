@@ -1,7 +1,7 @@
 "use client";
 
-import { SkeletonCard } from "@/components/youtube/last-month-views";
 import dynamic from "next/dynamic";
+import { SkeletonMessage } from "../chat/message";
 
 const ViewsTable = dynamic(
   () =>
@@ -10,7 +10,7 @@ const ViewsTable = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <SkeletonCard />,
+    loading: () => <SkeletonMessage />,
   }
 );
 
