@@ -26,7 +26,7 @@ const LoginButton = () => {
     <Button
       size="sm"
       variant="outline"
-      className="flex gap-1 items-center"
+      className="flex gap-2 items-center"
       onClick={() => handleLogIn("google")}
       disabled={isPending}
     >

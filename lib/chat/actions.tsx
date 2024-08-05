@@ -44,6 +44,8 @@ import { TotalCard } from "@/components/youtube/total-card";
 async function submitUserMessage(content: string) {
   "use server";
 
+  const user = await getUser();
+
   const session = await (await getSupabaseAuth().getSession()).data.session;
 
   if (!session?.provider_token || !session?.provider_token) {

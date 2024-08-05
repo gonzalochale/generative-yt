@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import LoginButton from "./auth/login-button";
 
 const Header = async () => {
   const user = await getUser();
@@ -32,33 +33,40 @@ const Header = async () => {
             <TooltipTrigger>
               <IconDisclaimer className="text-muted-foreground" />
             </TooltipTrigger>
-            <TooltipContent className="max-w-48">
+            <TooltipContent className="max-w-sm">
               <p className="text-sm text-muted-foreground">
-                Just kidding! We dont store any data in any form (or do we?)
+                Just kidding! (this is only a reference to the ChatGPT free tier
+                memory limit)
               </p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
       <div className="w-full flex justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="hover:cursor-pointer w-8 h-8">
-              <AvatarImage
-                src={user?.user_metadata.avatar_url}
-                alt={user?.user_metadata.full_name}
-              />
-              <AvatarFallback>
-                {user?.user_metadata.full_name.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem className="p-0">
-              <SignOutButton />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className="hover:cursor-pointer w-8 h-8">
+                <AvatarImage
+                  src={user?.user_metadata.avatar_url}
+                  alt={user?.user_metadata.full_name}
+                />
+                <AvatarFallback>
+                  {user?.user_metadata.full_name.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem className="p-0">
+                <SignOutButton />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <div className="w-full flex justify-end">
+            <LoginButton />
+          </div>
+        )}
       </div>
     </header>
   );

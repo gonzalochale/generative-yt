@@ -22,7 +22,7 @@ export function Chat({ id, className }: ChatProps) {
 
   useEffect(() => {
     setNewChatId(id);
-  });
+  }, [id, setNewChatId]);
 
   const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
     useScrollAnchor();
