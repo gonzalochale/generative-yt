@@ -54,3 +54,18 @@ export type viewsData = {
   date: string;
   views: number;
 };
+
+export type likesData = {
+  date: string;
+  likes: number;
+};
+
+export type commentsData = {
+  date: string;
+  comments: number;
+};
+
+export type subscribersData = {
+  date: string;
+  subscribers: number;
+};

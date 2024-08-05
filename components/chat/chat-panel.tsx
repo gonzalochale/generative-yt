@@ -27,18 +27,18 @@ export function ChatPanel({ input, setInput }: ChatPanelProps) {
     },
     {
       heading: "How many",
-      subheading: "views did i get the last month?",
-      message: `How many views did I get the last month?`,
+      subheading: "likes did i get the last month?",
+      message: `How many likes did I get the last month?`,
     },
     {
       heading: "How many",
-      subheading: "views did i get the last month?",
-      message: `How many views did I get the last month?`,
+      subheading: "comments did my channel get all time?",
+      message: `How many comments did my channel get all time?`,
     },
     {
       heading: "How many",
-      subheading: "views did i get the last month?",
-      message: `How many views did I get the last month?`,
+      subheading: "subscribers did my channel get all time?",
+      message: `How many subscribers did my channel get all time?`,
     },
   ];
 
