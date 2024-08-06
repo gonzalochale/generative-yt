@@ -11,13 +11,14 @@
 
 </div>
 
-## Live Demo
+## Video Preview
+
+[![Youtube preview](https://img.youtube.com/vi/awplAkWbLSc/0.jpg)](https://youtu.be/awplAkWbLSc)
+
+## Demo
 
 **[generative-yt.vercel.app](https://generative-yt.vercel.app)**
 
-## Preview
-
-![GenerativeUI by Gonzalo Chalé](public/assets/generative-preview.png)
 
 ## Stack
 

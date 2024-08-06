@@ -37,7 +37,7 @@ const Header = async () => {
     },
     {
       icon: IconYouTube,
-      href: "https://www.youtube.com/@chalegonzalo",
+      href: "https://youtu.be/awplAkWbLSc",
     },
   ];
   return (
