@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -14,9 +15,14 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import moment from "moment";
 import { motion } from "framer-motion";
+import { Button } from "../ui/button";
+import { useActions, useUIState } from "ai/rsc";
+import { AI } from "@/lib/chat/actions";
+import { nanoid } from "@/lib/utils";
+import { UserMessage } from "../chat/message";
 
 interface ViewsCardProps {
   data: viewsData[];
@@ -30,7 +36,22 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export const LastMonthViewsCard = ({ data }: ViewsCardProps) => {
+  const [messages, setMessages] = useUIState<typeof AI>();
+  const { submitUserMessage } = useActions();
   const totalViews = data.reduce((acc, { views }) => acc + views, 0);
+
+  const examples = [
+    {
+      heading: "See all time views",
+      subheading: "How many views did i get all time?",
+      message: `How many views did I get all time?`,
+    },
+    {
+      heading: "See all time likes",
+      subheading: "How many likes did i get all time?",
+      message: `How many likes did I get all time?`,
+    },
+  ];
 
   if (totalViews === 0) {
     return (
@@ -116,8 +137,8 @@ export const LastMonthViewsCard = ({ data }: ViewsCardProps) => {
                 accessibilityLayer
                 data={data}
                 margin={{
-                  left: 20,
-                  right: 20,
+                  left: 0,
+                  right: 0,
                 }}
               >
                 <CartesianGrid vertical={false} />
@@ -132,15 +153,82 @@ export const LastMonthViewsCard = ({ data }: ViewsCardProps) => {
                   cursor={false}
                   content={<ChartTooltipContent indicator="dashed" />}
                 />
+                <defs>
+                  <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="hsl(var(--chart-1))"
+                      stopOpacity={0.8}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="hsl(var(--chart-1))"
+                      stopOpacity={0.1}
+                    />
+                  </linearGradient>
+                  <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="hsl(var(--chart-1))"
+                      stopOpacity={0.8}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="hsl(var(--chart-1))"
+                      stopOpacity={0.1}
+                    />
+                  </linearGradient>
+                </defs>
                 <Area
                   dataKey="views"
-                  type="bump"
+                  type="linear"
                   fillOpacity={0.4}
+                  fill="url(#fillDesktop)"
                   stackId="a"
                 />
               </AreaChart>
             </ChartContainer>
           </CardContent>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            type: "spring",
+            duration: 0.3,
+            bounce: 0,
+            delay: 1.3,
+          }}
+        >
+          <CardFooter className="justify-end gap-3">
+            {examples.map((example) => (
+              <Button
+                key={example.heading}
+                size="sm"
+                variant="ghost"
+                onClick={async () => {
+                  setMessages((currentMessages) => [
+                    ...currentMessages,
+                    {
+                      id: nanoid(),
+                      display: <UserMessage>{example.message}</UserMessage>,
+                    },
+                  ]);
+
+                  const responseMessage = await submitUserMessage(
+                    example.message
+                  );
+
+                  setMessages((currentMessages) => [
+                    ...currentMessages,
+                    responseMessage,
+                  ]);
+                }}
+              >
+                {example.heading}
+              </Button>
+            ))}
+          </CardFooter>
         </motion.div>
       </Card>
     </motion.div>
