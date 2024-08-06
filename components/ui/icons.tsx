@@ -145,6 +145,46 @@ function IconOpenAI({ className, ...props }: React.ComponentProps<"svg">) {
   );
 }
 
+function IconX({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1200"
+      height="1227"
+      fill="none"
+      viewBox="0 0 1200 1227"
+      {...props}
+      className={cn("size-4", className)}
+    >
+      <path
+        fill="#fff"
+        d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"
+      />
+    </svg>
+  );
+}
+
+function IconYouTube({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      viewBox="0 0 256 180"
+      width="256"
+      height="180"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid"
+      fill="currentColor"
+      className={cn("size-4", className)}
+      {...props}
+    >
+      <path
+        d="M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z"
+        fill="red"
+      />
+      <path fill="#FFF" d="m102.421 128.06 66.328-38.418-66.328-38.418z" />
+    </svg>
+  );
+}
+
 export {
   IconDisclaimer,
   IconGitHub,
@@ -154,4 +194,6 @@ export {
   IconArrowUp,
   IconUser,
   IconOpenAI,
+  IconX,
+  IconYouTube,
 };

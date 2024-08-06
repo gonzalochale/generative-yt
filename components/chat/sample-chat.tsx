@@ -2,7 +2,7 @@
 
 import Textarea from "react-textarea-autosize";
 import { Button } from "@/components/ui/button";
-import { IconArrowRight } from "@/components/ui/icons";
+import { IconArrowRight, IconArrowUp } from "@/components/ui/icons";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -117,7 +117,7 @@ export function SampleChat() {
               disabled={input === ""}
               className="z-50 absolute right-2 bottom-6 rounded-full"
             >
-              <IconArrowRight />
+              <IconArrowUp />
             </Button>
           </form>
         </div>
@@ -131,12 +131,9 @@ export function SampleChat() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="w-full flex justify-center py-10">
-            <LoginButton />
-          </div>
-
           <DialogFooter>
-            <DialogClose>
+            <LoginButton />
+            <DialogClose className="max-sm:hidden">
               <Button variant="outline" size="sm">
                 Cancel
               </Button>

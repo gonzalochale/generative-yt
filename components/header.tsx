@@ -8,7 +8,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IconDisclaimer } from "@/components/ui/icons";
+import {
+  IconDisclaimer,
+  IconGitHub,
+  IconX,
+  IconYouTube,
+} from "@/components/ui/icons";
 import {
   Tooltip,
   TooltipContent,
@@ -16,9 +21,25 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import LoginButton from "./auth/login-button";
+import { Button } from "./ui/button";
 
 const Header = async () => {
   const user = await getUser();
+
+  const socials = [
+    {
+      icon: IconGitHub,
+      href: "https://github.com/gonzalochale/generative-yt",
+    },
+    {
+      icon: IconX,
+      href: "https://x.com/gonzalochale",
+    },
+    {
+      icon: IconYouTube,
+      href: "https://www.youtube.com/@chalegonzalo",
+    },
+  ];
   return (
     <header className="w-full flex items-center justify-between select-none">
       <div className="w-full flex justify-start">
@@ -42,7 +63,19 @@ const Header = async () => {
           </Tooltip>
         </TooltipProvider>
       </div>
-      <div className="w-full flex justify-end">
+      <div className="w-full flex gap-2 justify-end">
+        {socials.map((social) => (
+          <a
+            key={social.href}
+            href={social.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button size="icon" variant="ghost">
+              <social.icon />
+            </Button>
+          </a>
+        ))}
         {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -62,11 +95,7 @@ const Header = async () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        ) : (
-          <div className="w-full flex justify-end">
-            <LoginButton />
-          </div>
-        )}
+        ) : null}
       </div>
     </header>
   );
