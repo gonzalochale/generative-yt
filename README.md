@@ -6,18 +6,17 @@
   <br/>
   <h1>GenerativeYT</h1>
   <p>Your AI-powered assistant for optimizing your YouTube channel with advanced analytics and actionable insights.</p>
-  <br/><br/>
 </p>
 
 ## 🚀 Overview
 
 GenerativeYT use Vercel's AI SDK and various modern tools, this app provides real-time insights and personalized recommendations to improve your content strategy and channel performance.
 
-## 🎥 Video Preview
+## 🎥 Preview
 
-[![YouTube Preview](https://img.youtube.com/vi/awplAkWbLSc/0.jpg)](https://youtu.be/awplAkWbLSc)
+<video controls src="public/assets/demo.mp4" title="Demo"></video>
 
-## 🌐 Live Demo
+![Preview](public/assets/generative-preview.png)
 
 Explore the live demo of GenerativeYT at: **[generative-yt.vercel.app](https://generative-yt.vercel.app)**
 
