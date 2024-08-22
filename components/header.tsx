@@ -35,10 +35,6 @@ const Header = async () => {
       icon: IconX,
       href: "https://x.com/gonzalochale",
     },
-    {
-      icon: IconYouTube,
-      href: "https://youtu.be/awplAkWbLSc",
-    },
   ];
   return (
     <header className="w-full flex items-center justify-between select-none">
