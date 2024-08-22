@@ -12,14 +12,6 @@
 
 GenerativeYT use Vercel's AI SDK and various modern tools, this app provides real-time insights and personalized recommendations to improve your content strategy and channel performance.
 
-## 🎥 Preview
-
-<video controls src="public/assets/demo.mp4" title="Demo"></video>
-
-![Preview](public/assets/generative-preview.png)
-
-Explore the live demo of GenerativeYT at: **[generative-yt.vercel.app](https://generative-yt.vercel.app)**
-
 ## 🛠️ Tech Stack
 
 - **Next.js 14**: Utilizes Next.js 14 with the App Router for efficient and modern routing.
@@ -28,6 +20,18 @@ Explore the live demo of GenerativeYT at: **[generative-yt.vercel.app](https://g
 - **OpenAI GPT-4o-mini**: Powers intelligent, contextual responses within the chat interface.
 - **Vercel AI SDK**: Manages the generative UI, AI state management, hooks, and model connections.
 - **Shadcn UI & Tailwind CSS**: Provides a clean, responsive, and aesthetically pleasing user interface.
+
+## 👀 Run the project
+
+```bash
+npm install
+````
+
+```bash
+npm run dev
+```
+
+And set the enviroment variables, use the .env.example to create a .env.local
 
 ## 🤝 Contributing
 
