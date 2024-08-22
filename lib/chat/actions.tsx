@@ -131,8 +131,6 @@ async function submitUserMessage(content: string) {
             </GenerativeYTCard>
           );
 
-          await sleep(1000);
-
           const toolCallId = nanoid();
 
           const views = await getLastMonthViews();
@@ -184,8 +182,6 @@ async function submitUserMessage(content: string) {
               <SkeletonMessage />
             </GenerativeYTCard>
           );
-
-          await sleep(1000);
 
           const toolCallId = nanoid();
 
@@ -239,8 +235,6 @@ async function submitUserMessage(content: string) {
             </GenerativeYTCard>
           );
 
-          await sleep(1000);
-
           const toolCallId = nanoid();
 
           const comments = await getLastMonthComments();
@@ -292,8 +286,6 @@ async function submitUserMessage(content: string) {
               <SkeletonMessage />
             </GenerativeYTCard>
           );
-
-          await sleep(1000);
 
           const toolCallId = nanoid();
 
@@ -347,8 +339,6 @@ async function submitUserMessage(content: string) {
             </GenerativeYTCard>
           );
 
-          await sleep(1000);
-
           const toolCallId = nanoid();
 
           const views = await getAllTimeViews();
@@ -400,8 +390,6 @@ async function submitUserMessage(content: string) {
               <SkeletonMessage />
             </GenerativeYTCard>
           );
-
-          await sleep(1000);
 
           const toolCallId = nanoid();
 
@@ -455,8 +443,6 @@ async function submitUserMessage(content: string) {
             </GenerativeYTCard>
           );
 
-          await sleep(1000);
-
           const toolCallId = nanoid();
 
           const comments = await getAllTimeComments();
@@ -508,8 +494,6 @@ async function submitUserMessage(content: string) {
               <SkeletonMessage />
             </GenerativeYTCard>
           );
-
-          await sleep(1000);
 
           const toolCallId = nanoid();
 
